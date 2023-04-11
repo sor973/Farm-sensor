@@ -1,4 +1,3 @@
-import "./App.css"
 import {localenv} from "./env"
 
 function App() {

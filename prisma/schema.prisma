@@ -12,10 +12,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model TempandHumid {
-  id String  @id @default(auto()) @map("_id") @db.ObjectId
-  slaveid Int?
-  temp Float?
-  humid Float?
-  createdAt DateTime? @default(now())
+model Data {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  slaveid   Int
+  temp      Float
+  humid     Float
+  createdAt DateTime @default(now())
 }
