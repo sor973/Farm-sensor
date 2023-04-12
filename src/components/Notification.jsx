@@ -77,10 +77,10 @@ const Notification = ({ handleOpen, handleClose, open }) => {
                   variant="subtitle1"
                   sx={{ color: theme.palette.secondary[100] }}
                 >
-                  Set Humid
+                  Set Temp
                 </Typography>
                 <FormControl>
-                  <Input id="token-id" />
+                  <Input id="Temp-value" type="number" />
                 </FormControl>
               </FlexBetween>
 
@@ -89,10 +89,10 @@ const Notification = ({ handleOpen, handleClose, open }) => {
                   variant="subtitle1"
                   sx={{ color: theme.palette.secondary[100] }}
                 >
-                  Set Temp
+                  Set Humid
                 </Typography>
                 <FormControl>
-                  <Input id="temp-value" type="number" />
+                  <Input id="humid-value" type="number" />
                 </FormControl>
               </FlexBetween>
             </Box>

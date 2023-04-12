@@ -3,10 +3,12 @@ const router = expressJS.Router();
 
 // API Route Import
 const recdata = require("./routes/recdata");
-const ping = require("./routes/ping");
+const getdata = require("./routes/getdata");
+
 // API Route Setting
 router.use("/recdata",recdata);
-router.use("/ping",ping);
+router.use("/getdata",getdata);
+
 // API Default Route
 router.use("/", (req,res)=>{
     res.status(403);
