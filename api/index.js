@@ -1,10 +1,14 @@
 const expressJS = require('express');
-const app = expressJS();
+const router = expressJS.Router();
 
-
-require("./routes/main.routes.js")(app);
-
-app.use("/", (req, res) => {
+// API Route Import
+const recdata = require("./routes/recdata");
+const ping = require("./routes/ping");
+// API Route Setting
+router.use("/recdata",recdata);
+router.use("/ping",ping);
+// API Default Route
+router.use("/", (req,res)=>{
     res.status(403);
     res.json({
         error: true,
@@ -12,5 +16,4 @@ app.use("/", (req, res) => {
     });
 });
 
-
-module.exports = app;
+module.exports = router;
