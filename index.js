@@ -74,7 +74,7 @@ function handoff() {
     } catch (err) {
       console.error("Error while checking database", err);
     }
-  }, 1 * 30 * 1000); // 5 minutes in milliseconds
+  }, 5 * 60 * 1000); // 5 minutes in milliseconds
 
   mongoose.set("strictQuery", false);
   mongoose

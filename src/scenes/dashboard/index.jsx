@@ -7,6 +7,9 @@ import {
   PointOfSale,
   PersonAdd,
   Traffic,
+  WaterDrop,
+  DeviceThermostat,
+  Grass,
 } from "@mui/icons-material";
 import {
   Box,
@@ -20,6 +23,7 @@ import BreakdownChart from "../../components/BreakdownChart";
 import OverviewChart from "../../components/OverviewChart";
 import { useGetDashboardQuery } from "../../state/api";
 import StatBox from "../../components/StatBox";
+import Greenhousedata from "../../components/Greenhousedata";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -56,26 +60,16 @@ const Dashboard = () => {
       renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
     },
   ];
-
+  const greenhousedata = {
+      slaveid: 2,
+      tempAir: 39.9,
+      humidAir: 31.49,
+      humidSoil: 0
+  }
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
-
-        {/* <Box>
-          <Button
-            sx={{
-              backgroundColor: theme.palette.secondary.light,
-              color: theme.palette.background.alt,
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-          >
-            <DownloadOutlined sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box> */}
       </FlexBetween>
 
       <Box
@@ -88,14 +82,16 @@ const Dashboard = () => {
           "& > div": { gridColumn: isNonMediumScreens ? undefined : "span 12" },
         }}
       >
-        {/* ROW 1 */}
-        <StatBox
+        <Greenhousedata
+          slavedata = {greenhousedata}
+        />
+        {/* <StatBox
           title="Total Customers"
-          value={data && data.totalCustomers}
+          value= "10"
           increase="+14%"
           description="Since last month"
           icon={
-            <Email
+            <DeviceThermostat
               sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
             />
           }
@@ -106,27 +102,29 @@ const Dashboard = () => {
           increase="+21%"
           description="Since last month"
           icon={
-            <PointOfSale
+            <WaterDrop
               sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
             />
           }
         />
-        <Box
-          gridColumn="span 8"
-          gridRow="span 2"
-          backgroundColor={theme.palette.background.alt}
-          p="1rem"
-          borderRadius="0.55rem"
-        >
-          <OverviewChart view="sales" isDashboard={true} />
-        </Box>
+        <StatBox
+          title="Yearly Sales"
+          value={data && data.yearlySalesTotal}
+          increase="+43%"
+          description="Since last month"
+          icon={
+            <Grass
+              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
+            />
+          }
+        />
         <StatBox
           title="Monthly Sales"
           value={data && data.thisMonthStats.totalSales}
           increase="+5%"
           description="Since last month"
           icon={
-            <PersonAdd
+            <Traffic
               sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
             />
           }
@@ -142,63 +140,26 @@ const Dashboard = () => {
             />
           }
         />
-
-        {/* ROW 2 */}
+        <StatBox
+          title="Yearly Sales"
+          value={data && data.yearlySalesTotal}
+          increase="+43%"
+          description="Since last month"
+          icon={
+            <Traffic
+              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
+            />
+          }
+        /> */}
         <Box
-          gridColumn="span 8"
-          gridRow="span 3"
-          sx={{
-            "& .MuiDataGrid-root": {
-              border: "none",
-              borderRadius: "5rem",
-            },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "none",
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: theme.palette.background.alt,
-              color: theme.palette.secondary[100],
-              borderBottom: "none",
-            },
-            "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: theme.palette.background.alt,
-            },
-            "& .MuiDataGrid-footerContainer": {
-              backgroundColor: theme.palette.background.alt,
-              color: theme.palette.secondary[100],
-              borderTop: "none",
-            },
-            "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-              color: `${theme.palette.secondary[200]} !important`,
-            },
-          }}
-        >
-          <DataGrid
-            loading={isLoading || !data}
-            getRowId={(row) => row._id}
-            rows={(data && data.transactions) || []}
-            columns={columns}
-          />
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 3"
+          gridColumn="span 12"
+          gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
-          p="1.5rem"
+          p="1rem"
           borderRadius="0.55rem"
+          style={{ marginBottom: "2rem" }}
         >
-          <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
-            Sales By Category
-          </Typography>
-          <BreakdownChart isDashboard={true} />
-          <Typography
-            p="0 0.6rem"
-            fontSize="0.8rem"
-            sx={{ color: theme.palette.secondary[200] }}
-          >
-            Breakdown of real states and information via category for revenue
-            made for this year and total sales.
-          </Typography>
+          <OverviewChart view="sales" isDashboard={true} />
         </Box>
       </Box>
     </Box>
