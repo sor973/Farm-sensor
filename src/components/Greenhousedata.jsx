@@ -10,14 +10,19 @@ const Greenhousedata = ({ slavedata }) => {
     <Box
       mt="20px"
       display="grid"
-      gridTemplateColumns="repeat(12, 1fr)"
+      gridTemplateColumns="repeat(6, 1fr)" // change to 6 columns
       gridAutoRows="160px"
       gap="20px"
       sx={{
-        "& > div": { gridColumn: isNonMediumScreens ? undefined : "span 12" },
+        "& > div": { gridColumn: isNonMediumScreens ? undefined : "span 6" },
+        // set gridColumn for StatBox components to span 2 columns
+        "& .statbox": {
+          gridColumn: "span 2",
+        },
       }}
     >
       <StatBox
+        className="statbox" // add className to apply gridColumn styling
         title="Temperature"
         value={slavedata.tempAir}
         description={`Greenhouse ${slavedata.slaveid}`}
@@ -28,6 +33,7 @@ const Greenhousedata = ({ slavedata }) => {
         }
       />
       <StatBox
+        className="statbox" // add className to apply gridColumn styling
         title="Air Humidity"
         value={slavedata.humidAir}
         description={`Greenhouse ${slavedata.slaveid}`}
@@ -38,6 +44,7 @@ const Greenhousedata = ({ slavedata }) => {
         }
       />
       <StatBox
+        className="statbox" // add className to apply gridColumn styling
         title="Soil Humidity"
         value={slavedata.humidSoil}
         description={`Greenhouse ${slavedata.slaveid}`}
@@ -50,4 +57,5 @@ const Greenhousedata = ({ slavedata }) => {
     </Box>
   );
 };
+
 export default Greenhousedata;

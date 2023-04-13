@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
 import FlexBetween from "../../components/FlexBetween";
 import Header from "../../components/Header";
-
 import { Box, useTheme, useMediaQuery } from "@mui/material";
-
 import OverviewChart from "../../components/OverviewChart";
-import { useGetDashboardQuery } from "../../state/api";
-
 import Greenhousedata from "../../components/Greenhousedata";
 import axios from "axios";
+import { useGetDashboardQuery } from "../../state/api";
 
 const Dashboard = () => {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
 
-  const [apiData, setApiData] = React.useState([]);
-  const [apidayData, setApidayData] = React.useState([]);
+  const [apiData, setApiData] = useState([]);
+  const [apidayData, setApidayData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,12 +32,14 @@ const Dashboard = () => {
         console.log(JSON.stringify(err.response.data));
       }
     };
-    const usefunc = async () => {
-      getdaydata();
+
+    fetchData();
+    getdaydata();
+
+    const intervalId = setInterval(() => {
       fetchData();
-    }
-    
-    const intervalId = setInterval(usefunc, 60000); // Fetch data every minute
+      getdaydata();
+    }, 60000); // Fetch data every minute
 
     return () => clearInterval(intervalId); // Cleanup function to clear interval on unmount
   }, []);
@@ -69,7 +68,7 @@ const Dashboard = () => {
           backgroundColor={theme.palette.background.alt}
           p="1rem"
           borderRadius="0.55rem"
-          style={{ marginBottom: "2rem" }}
+          style={{ marginBottom: "1.5rem" }}
         >
           <OverviewChart view="sales" isDashboard={true} daydata={apidayData} />
         </Box>

@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
     ]);
     // Transform the data to the desired format
     const transformedData = dayData.map(({ _id, avgTemperature }) => {
-      const day = `${_id.day} Day ${_id.hour} H`;
+      const day = `${_id.hour}:00`;
       return {
         x: day,
         y: avgTemperature,
