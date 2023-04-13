@@ -1,54 +1,22 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { useGetSalesQuery } from "../state/api";
 
-const OverviewChart = ({ isDashboard = false, view }) => {
+const OverviewChart = ({ isDashboard = false, view , daydata }) => {
   const theme = useTheme();
-  const { data, isLoading } = useGetSalesQuery();
 
-  const [totalSalesLine, totalUnitsLine] = useMemo(() => {
-    if (!data) return [];
-
-    const { monthlyData } = data;
-    const totalSalesLine = {
-      id: "totalSales",
+  const setdaydata = [
+    {
+      id: "data",
       color: theme.palette.secondary.main,
-      data: [],
-    };
-    const totalUnitsLine = {
-      id: "totalUnits",
-      color: theme.palette.secondary[600],
-      data: [],
-    };
-
-    Object.values(monthlyData).reduce(
-      (acc, { month, totalSales, totalUnits }) => {
-        const curSales = acc.sales + totalSales;
-        const curUnits = acc.units + totalUnits;
-
-        totalSalesLine.data = [
-          ...totalSalesLine.data,
-          { x: month, y: curSales },
-        ];
-        totalUnitsLine.data = [
-          ...totalUnitsLine.data,
-          { x: month, y: curUnits },
-        ];
-
-        return { sales: curSales, units: curUnits };
-      },
-      { sales: 0, units: 0 }
-    );
-
-    return [[totalSalesLine], [totalUnitsLine]];
-  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  if (!data || isLoading) return "Loading...";
+      data: daydata
+    }
+  ]
 
   return (
     <ResponsiveLine
-      data={view === "sales" ? totalSalesLine : totalUnitsLine}
+      data={setdaydata}
       theme={{
         axis: {
           domain: {
@@ -82,11 +50,11 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           },
         },
       }}
-      margin={{ top: 20, right: 50, bottom: 50, left: 70 }}
+      margin={{ top: 20, right: 50, bottom: 40, left: 70 }}
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",
-        min: "auto",
+        min: "0",
         max: "auto",
         stacked: false,
         reverse: false,

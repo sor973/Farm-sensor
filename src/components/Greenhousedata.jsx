@@ -1,12 +1,22 @@
 import React from "react";
 import StatBox from "./StatBox";
 import { WaterDrop, DeviceThermostat, Grass } from "@mui/icons-material";
-import { Typography, Box, useTheme } from "@mui/material";
+import { Typography, Box, useTheme, useMediaQuery } from "@mui/material";
 
 const Greenhousedata = ({ slavedata }) => {
+  const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   const theme = useTheme();
   return (
-    <div>
+    <Box
+      mt="20px"
+      display="grid"
+      gridTemplateColumns="repeat(12, 1fr)"
+      gridAutoRows="160px"
+      gap="20px"
+      sx={{
+        "& > div": { gridColumn: isNonMediumScreens ? undefined : "span 12" },
+      }}
+    >
       <StatBox
         title="Temperature"
         value={slavedata.tempAir}
@@ -37,7 +47,7 @@ const Greenhousedata = ({ slavedata }) => {
           />
         }
       />
-    </div>
+    </Box>
   );
 };
 export default Greenhousedata;
