@@ -23,7 +23,7 @@ const Notification = ({ handleOpen, handleClose, open }) => {
   const getdata = (e) => {
     e?.preventDefault();
     axios
-      .get("http://localhost:8000/api/getuser")
+      .get("http://192.168.43.196:8000/api/getuser")
       .then((res) => {
         setApiData(res.data);
         setNotify(res.data.notify);
@@ -54,7 +54,7 @@ const Notification = ({ handleOpen, handleClose, open }) => {
       humidAir: humidAir,
     };
     axios
-      .post("http://localhost:8000/api/setnotify", data)
+      .post("http://192.168.43.196:8000/api/setnotify", data)
       .then((res) => {
         console.log(res);
       })
@@ -79,7 +79,7 @@ const Notification = ({ handleOpen, handleClose, open }) => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: "30%",
+            width: "70%",
             maxWidth: "600px",
             height: "auto",
             backgroundColor: theme.palette.background.alt,
