@@ -4,8 +4,8 @@ const User = require('../../models/usermodel')
 
 router.post("/",async (req,res)=>{
     try {
-        const { user_id, notify, tempAir, humidAir } = req.body;
-        const filter = { userid: user_id };
+        const { userid, notify, tempAir, humidAir } = req.body;
+        const filter = { userid };
         const update = { notify, tempAir, humidAir };
         const options = { new: true, upsert: true };
         const user = await User.findOneAndUpdate(filter, update, options);
