@@ -20,7 +20,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/getdata");
+        const res = await axios.get("http://192.168.43.196:8000/api/getdata");
         setApiData(res.data);
       } catch (err) {
         console.log(JSON.stringify(err.response.data));
@@ -29,7 +29,7 @@ const Dashboard = () => {
 
     const getdaydata = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/daydata");
+        const res = await axios.get("http://192.168.43.196:8000/api/daydata");
         setApidayData(res.data);
       } catch (err) {
         console.log(JSON.stringify(err.response.data));
