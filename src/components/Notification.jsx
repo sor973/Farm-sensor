@@ -56,7 +56,8 @@ const Notification = ({ handleClose, open }) => {
     axios
       .post(`${axiosConfiguration.url}/api/setnotify`, data)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        handleClose()
       })
       .catch((err) => console.log(JSON.stringify(err.response.data)));
   };
@@ -133,7 +134,7 @@ const Notification = ({ handleClose, open }) => {
                   variant="subtitle1"
                   sx={{ color: theme.palette.secondary[100], mr: 4  }}
                 >
-                  Set Temp
+                  Set Temp มากกว่า
                 </Typography>
                 <FormControl>
                   <Input id="Temp-value" type="number" sx={{ width: '80px' }} defaultValue={apiData.tempAir} onChange={handleTempChange}/>
@@ -145,7 +146,7 @@ const Notification = ({ handleClose, open }) => {
                   variant="subtitle1"
                   sx={{ color: theme.palette.secondary[100], mr: 4  }}
                 >
-                  Set Humid
+                  Set Humid น้อยกว่า
                 </Typography>
                 <FormControl>
                   <Input id="humid-value" type="number" sx={{ width: '80px' }} defaultValue={apiData.humidAir} onChange={handleHumidChange}/>
