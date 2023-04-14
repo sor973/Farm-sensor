@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
   try {
     const latestData = await Data.find({}).sort({ createdAt: -1 }).limit(2);
     res.status(200).json(latestData);
-    console.log(latestData);
+    // console.log(latestData);
   } catch (error) {
     res.status(400).json({
       error: "Bad Request Or Data not complete. ",

@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
   try {
     const userdata = await User.findOne({ userid: 1 });
     res.status(200).json(userdata);
-    console.log("received req")
+    // console.log("received req")
   } catch (error) {
     res.status(400).json({
       error: "Bad Request Or Data not complete. ",

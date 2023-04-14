@@ -10,7 +10,7 @@ router.post("/",async (req,res)=>{
         const options = { new: true, upsert: true };
         const user = await User.findOneAndUpdate(filter, update, options);
         res.status(200).json(user);
-        console.log(user)
+        // console.log(user)
     } catch (error) {
         res.status(400);
         res.json({

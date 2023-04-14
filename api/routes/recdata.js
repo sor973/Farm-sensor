@@ -6,7 +6,7 @@ router.post("/",async (req,res)=>{
     try {
         const data = await Data.create(req.body);
         res.status(200).json(data);
-        console.log(data)
+        // console.log(data)
     } catch (error) {
         res.status(400);
         res.json({

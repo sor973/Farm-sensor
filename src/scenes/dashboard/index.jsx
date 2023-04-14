@@ -5,7 +5,7 @@ import { Box, useTheme, useMediaQuery } from "@mui/material";
 import OverviewChart from "../../components/OverviewChart";
 import Greenhousedata from "../../components/Greenhousedata";
 import axios from "axios";
-import { useGetDashboardQuery } from "../../state/api";
+import { axiosConfiguration } from "../../axiosconfig"
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -17,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://192.168.43.196:8000/api/getdata");
+        const res = await axios.get(`${axiosConfiguration.url}/api/getdata`);
         setApiData(res.data);
       } catch (err) {
         console.log(JSON.stringify(err.response.data));
@@ -26,7 +26,7 @@ const Dashboard = () => {
 
     const getdaydata = async () => {
       try {
-        const res = await axios.get("http://192.168.43.196:8000/api/daydata");
+        const res = await axios.get(`${axiosConfiguration.url}/api/daydata`);
         setApidayData(res.data);
       } catch (err) {
         console.log(JSON.stringify(err.response.data));

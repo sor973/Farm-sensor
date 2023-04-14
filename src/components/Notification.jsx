@@ -6,14 +6,14 @@ import {
   Button,
   Switch,
   FormControl,
-  InputLabel,
   Input,
 } from "@mui/material";
 import FlexBetween from "./FlexBetween";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { axiosConfiguration } from "../axiosconfig"
 
-const Notification = ({ handleOpen, handleClose, open }) => {
+const Notification = ({ handleClose, open }) => {
   const theme = useTheme();
   const [apiData, setApiData] = React.useState({});
   const [notify, setNotify] = React.useState(false);
@@ -23,7 +23,7 @@ const Notification = ({ handleOpen, handleClose, open }) => {
   const getdata = (e) => {
     e?.preventDefault();
     axios
-      .get("http://192.168.43.196:8000/api/getuser")
+      .get(`${axiosConfiguration.url}/api/getuser`)
       .then((res) => {
         setApiData(res.data);
         setNotify(res.data.notify);
@@ -54,7 +54,7 @@ const Notification = ({ handleOpen, handleClose, open }) => {
       humidAir: humidAir,
     };
     axios
-      .post("http://192.168.43.196:8000/api/setnotify", data)
+      .post(`${axiosConfiguration.url}/api/setnotify`, data)
       .then((res) => {
         console.log(res);
       })
@@ -79,8 +79,8 @@ const Notification = ({ handleOpen, handleClose, open }) => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: "70%",
-            maxWidth: "600px",
+            width: "90%",
+            maxWidth: "300px",
             height: "auto",
             backgroundColor: theme.palette.background.alt,
             borderRadius: "0.55rem",
@@ -88,6 +88,12 @@ const Notification = ({ handleOpen, handleClose, open }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
+            "@media (min-width: 600px)": {
+              width: "50%",
+            },
+            "@media (min-width: 960px)": {
+              width: "30%",
+            },
           }}
         >
           <Box
@@ -125,24 +131,24 @@ const Notification = ({ handleOpen, handleClose, open }) => {
               <FlexBetween>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: theme.palette.secondary[100] }}
+                  sx={{ color: theme.palette.secondary[100], mr: 4  }}
                 >
                   Set Temp
                 </Typography>
                 <FormControl>
-                  <Input id="Temp-value" type="number" defaultValue={apiData.tempAir} onChange={handleTempChange}/>
+                  <Input id="Temp-value" type="number" sx={{ width: '80px' }} defaultValue={apiData.tempAir} onChange={handleTempChange}/>
                 </FormControl>
               </FlexBetween>
 
               <FlexBetween>
                 <Typography
                   variant="subtitle1"
-                  sx={{ color: theme.palette.secondary[100] }}
+                  sx={{ color: theme.palette.secondary[100], mr: 4  }}
                 >
                   Set Humid
                 </Typography>
                 <FormControl>
-                  <Input id="humid-value" type="number" defaultValue={apiData.humidAir} onChange={handleHumidChange}/>
+                  <Input id="humid-value" type="number" sx={{ width: '80px' }} defaultValue={apiData.humidAir} onChange={handleHumidChange}/>
                 </FormControl>
               </FlexBetween>
             </Box>

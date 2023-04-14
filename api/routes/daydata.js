@@ -43,7 +43,7 @@ router.get("/", async (req, res) => {
       };
     });
     res.status(200).json(transformedData);
-    console.log(transformedData);
+    // console.log(transformedData);
   } catch (error) {
     res.status(400).json({
       error: "Bad Request Or Data not complete. ",

@@ -1,7 +1,7 @@
 import React from "react";
 import StatBox from "./StatBox";
 import { WaterDrop, DeviceThermostat, Grass } from "@mui/icons-material";
-import { Typography, Box, useTheme, useMediaQuery } from "@mui/material";
+import { Box, useTheme, useMediaQuery } from "@mui/material";
 
 const Greenhousedata = ({ slavedata }) => {
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
