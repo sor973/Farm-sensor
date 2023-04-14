@@ -6,7 +6,7 @@
 
 ## ขั้นตอนการติดตั้ง package ต่างๆ ที่จำเป็นต้องใช้งาน
 ```bash
- npm install \
+ npm install
  npm run build
  ```
  
