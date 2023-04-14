@@ -1,18 +1,17 @@
-import React, from "react";
+import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 
-
-const OverviewChart = ({ isDashboard = false, view , daydata }) => {
+const OverviewChart = ({ daydata }) => {
   const theme = useTheme();
 
   const setdaydata = [
     {
-      id: "data",
+      id: "datadate",
       color: theme.palette.secondary.main,
       data: daydata
     }
-  ]
+  ];
 
   return (
     <ResponsiveLine
@@ -61,7 +60,7 @@ const OverviewChart = ({ isDashboard = false, view , daydata }) => {
       }}
       yFormat=" >-.2f"
       curve="catmullRom"
-      enableArea={isDashboard}
+      enableArea={true}
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -91,36 +90,32 @@ const OverviewChart = ({ isDashboard = false, view , daydata }) => {
       pointBorderColor={{ from: "serieColor" }}
       pointLabelYOffset={-12}
       useMesh={true}
-      legends={
-        !isDashboard
-          ? [
-              {
-                anchor: "bottom-right",
-                direction: "column",
-                justify: false,
-                translateX: 30,
-                translateY: -40,
-                itemsSpacing: 0,
-                itemDirection: "left-to-right",
-                itemWidth: 80,
-                itemHeight: 20,
-                itemOpacity: 0.75,
-                symbolSize: 12,
-                symbolShape: "circle",
-                symbolBorderColor: "rgba(0, 0, 0, .5)",
-                effects: [
-                  {
-                    on: "hover",
-                    style: {
-                      itemBackground: "rgba(0, 0, 0, .03)",
-                      itemOpacity: 1,
-                    },
-                  },
-                ],
+      legends={[
+        {
+          anchor: "bottom-right",
+          direction: "column",
+          justify: false,
+          translateX: 30,
+          translateY: -40,
+          itemsSpacing: 0,
+          itemDirection: "left-to-right",
+          itemWidth: 80,
+          itemHeight: 20,
+          itemOpacity: 0.75,
+          symbolSize: 12,
+          symbolShape: "circle",
+          symbolBorderColor: "rgba(0, 0, 0, .5)",
+          effects: [
+            {
+              on: "hover",
+              style: {
+                itemBackground: "rgba(0, 0, 0, .03)",
+                itemOpacity: 1,
               },
-            ]
-          : undefined
-      }
+            },
+          ],
+        },
+      ]}
     />
   );
 };
